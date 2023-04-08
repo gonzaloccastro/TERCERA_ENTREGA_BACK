@@ -20,6 +20,11 @@ import ManagerMongoDb from "../dao/mongo/ManagerMongoDB.js";
 const router = Router();
 const productManger = new ManagerMongoDb.ProductManger(); 
 
+
+router.get('/createProducts', (req, res) => {
+    res.render('createProducts', {});
+})
+
 router.get('/', async (req,res) => {
     const {limit, page, sort, query} = req.query
     let queryList = {limit, page, sort, query}
@@ -35,8 +40,8 @@ router.get('/', async (req,res) => {
 
 router.post('/', async (req,res) => {
     const newProduct = {
-        ...req.body,
-      };
+        ...req.body
+        };
       try {
         const response = await productManger.createProduct(newProduct);
         res.send(response);

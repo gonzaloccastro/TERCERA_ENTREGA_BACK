@@ -60,7 +60,7 @@ elementExists("send") &&
       .then((data) => {
         console.log(typeof data);
         if (data === "success") {
-        window.location.href = "/api/login/products";
+        window.location.href = "/api/login/products/";
         } else {
         console.log()
         alert("Usuario o contraseña incorrecta");
@@ -185,10 +185,43 @@ const paginaProductos = () => {
   btnAnterior.addEventListener("click", anterior);
 };
 elementExists("pag") && paginaProductos();
-// if (window.location.href == 'http://localhost:8080/api/home/products'){
-//     console.log('holaaaaa')
-//     paginaProductos()
-// }
+
+
+//---------------------------AGREGAR PRODUCTO----------------------//
+
+elementExists("addProduct") &&
+  document.getElementById("addProduct").addEventListener("click",
+   async () => {
+    try {
+      const productTitle = document.getElementById("productTitle").value;
+      const productDescription = document.getElementById("productDescription").value;
+      const productPrice = document.getElementById("productPrice").value;
+      const productCode = document.getElementById("productCode").value;
+      const productCategory = document.getElementById("productCategory").value;
+      const data = { 
+        title: productTitle, 
+        description: productDescription, 
+        price: productPrice, 
+        code: productCode, 
+        category: productCategory };
+      await fetch("/api/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data)
+      })
+      .then((data) => {
+        const result = data.json();
+        console.log(result);
+        if (data.status === 200) {
+          window.location.href = "/api/products/";
+        }
+      });
+    } catch (error) {
+      console.log(error);
+  }});
+
 
 //---------------------------------- CARRITO -------------------------------------------------------
 const getCart = async () => {

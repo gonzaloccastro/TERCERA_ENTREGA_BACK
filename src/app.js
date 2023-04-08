@@ -14,6 +14,8 @@ import loginRouter from "./routes/login.routes.js";
 import productsRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import githubRoutes from "./routes/github.routes.js";
+import {mockinRouter} from "./routes/mockinProducts.routes.js"
+
 
 dotenv.config();
 const app = express();
@@ -71,3 +73,4 @@ app.use("/api/login", loginRouter);
 app.use("/api/products", productsRoutes);
 app.use("/api/carts", cartRoutes);
 app.use("/api/sessions", githubRoutes);
+app.use("/mockingproducts", mockinRouter) 

@@ -2,11 +2,11 @@ import bcrypt from "bcrypt";
 import {faker} from "@faker-js/faker";
 
 
-const createHash = (password) => {
+export const createHash = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-const isValidPassword = (user, password) => {
+export const isValidPassword = (user, password) => {
   return bcrypt.compareSync(password, user.password);
 };
 
@@ -16,12 +16,22 @@ faker.locale = "es";
 
 export const generateProduct = ()=>{
     return {
+        id:database.mongodbObjectId(),
         title:commerce.productName(),
+        description:commerce.productName(),
         price:commerce.price(),
         stock:random.numeric(1),
-        id:database.mongodbObjectId(),
         image:image.image(),
     }
 }
 
-export { createHash, isValidPassword };
+export const generateProducts = ()=>{
+  let products=[];
+  const numberOfProducts = 100;
+  for(let i=0;i<numberOfProducts;i++){
+      const newProduct = generateProduct();
+      products.push(newProduct);
+  }
+
+  return products
+}
