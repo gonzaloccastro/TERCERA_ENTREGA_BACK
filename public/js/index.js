@@ -193,9 +193,25 @@ elementExists("addProduct") &&
   document.getElementById("addProduct").addEventListener("click",
    async () => {
     try {
-      const productTitle = document.getElementById("productTitle").value;
+      let productTitle = document.getElementById("productTitle").value;
+      function validarTitulo() {
+        if (productTitle.length == 0) {
+          alert('Debe completar el título');
+          console.log('Debe completar estos campos: Título, Descripción, Precio, Código, Categoría')
+          return undefined          
+        }
+      }
+      validarTitulo();
       const productDescription = document.getElementById("productDescription").value;
-      const productPrice = document.getElementById("productPrice").value;
+      let productPrice = document.getElementById("productPrice").value;
+      function validarPrecio() {
+        if (productTitle.length == 0) {
+          alert('Debe completar el precio');
+          console.log('Debe completar estos campos: Título, Descripción, Precio, Código, Categoría')
+          return undefined        
+        }
+      }
+      validarPrecio();
       const productCode = document.getElementById("productCode").value;
       const productCategory = document.getElementById("productCategory").value;
       const data = { 
